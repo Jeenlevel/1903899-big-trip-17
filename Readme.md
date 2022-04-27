@@ -1,7 +1,7 @@
 # Проект «Большое путешествие»
 
 * Студент: [Евгений Макаров](https://up.htmlacademy.ru/ecmascript/17/user/1903899).
-* Наставник: `Неизвестно`.
+* Наставник: [Геннадий Максимов](https://htmlacademy.ru/profile/gennadiy).
 
 ---
 
