@@ -1,5 +1,6 @@
 const path = require('path');
 const CopyPlugin = require("copy-webpack-plugin");
+const { ProgressPlugin } = require("webpack")
 
 module.exports = {
   entry: './src/main.js',
@@ -10,6 +11,7 @@ module.exports = {
   },
   devtool: 'source-map',
   plugins: [
+    new ProgressPlugin(),
     new CopyPlugin({
       patterns: [{ from: 'public' }],
     }),
