@@ -1,10 +1,11 @@
+//точка маршпута (в списке)
 import {createElement} from '../render.js';
 
-const createBoardTemplate = () => '<section class="board container"></section>';
+const createPointListTemplate = () => '<ul class="trip-events__list"></ul>';
 
-export default class BoardView {
+export default class WaypointView {
   getTemplate() {
-    return createBoardTemplate();
+    return createPointListTemplate();
   }
 
   getElement() {

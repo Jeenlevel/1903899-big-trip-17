@@ -1,27 +1,21 @@
-import BoardView from '../view/board-view.js';
-import SortView from '../view/sort-view.js';
-import TaskListView from '../view/task-list-view.js';
-import TaskView from '../view/task-view.js';
-import TaskEditView from '../view/task-edit-view.js';
-import LoadMoreButtonView from '../view/load-more-button-view.js';
+import CreateFormView from '../view/creation-form-view.js';
+import EditFormView from '../view/edit-form-view.js';
 import {render} from '../render.js';
+import WaypointView from '../view/waypoint-view.js';
+import PointView from '../view/point-view.js';
 
 export default class BoardPresenter {
-  boardComponent = new BoardView();
-  taskListComponent = new TaskListView();
+  waypointViewComponent = new WaypointView();
 
   init = (boardContainer) => {
     this.boardContainer = boardContainer;
 
-    render(this.boardComponent, this.boardContainer);
-    render(new SortView(), this.boardComponent.getElement());
-    render(this.taskListComponent, this.boardComponent.getElement());
-    render(new TaskEditView(), this.taskListComponent.getElement());
+    render(this.piontListComponent, this.boardContainer);
+    render(new EditFormView(), this.piontListComponent.getElement());
+    render(new CreateFormView(), this.piontListComponent.getElement());
 
     for (let i = 0; i < 3; i++) {
-      render(new TaskView(), this.taskListComponent.getElement());
+      render(new PointView(), this.piontListComponent.getElement());
     }
-
-    render(new LoadMoreButtonView(), this.boardComponent.getElement());
   };
 }
