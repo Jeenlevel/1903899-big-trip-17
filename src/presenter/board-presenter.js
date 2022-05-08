@@ -10,12 +10,12 @@ export default class BoardPresenter {
   init = (boardContainer) => {
     this.boardContainer = boardContainer;
 
-    render(this.piontListComponent, this.boardContainer);
-    render(new EditFormView(), this.piontListComponent.getElement());
-    render(new CreateFormView(), this.piontListComponent.getElement());
+    render(this.pointListComponent, this.boardContainer);
+    render(new EditFormView(), this.pointListComponent.getElement());
+    render(new CreateFormView(), this.pointListComponent.getElement());
 
     for (let i = 0; i < 3; i++) {
-      render(new PointView(), this.piontListComponent.getElement());
+      render(new PointView(), this.pointListComponent.getElement());
     }
   };
 }
