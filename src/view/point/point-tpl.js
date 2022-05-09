@@ -1,5 +1,3 @@
-//точка маршпута (в списке)
-import {createElement} from '../render.js';
 import { getDurationDates } from '../../utils';
 import { getTitle } from '../../utils';
 
@@ -16,7 +14,7 @@ const getOffers = (trip) => {
   return offersTemplate;
 };
 
-const createPointListTemplate = (boardPoint) => {
+const createPointTemplate = (boardPoint) => {
   const {
     basePrice,
     dateFrom,
@@ -63,25 +61,5 @@ const createPointListTemplate = (boardPoint) => {
      </li>`
   );
 };
-export default class WaypointView {
-  constructor(boardPoint) {
-    this.boardPoint = boardPoint;
-  }
 
-
-  getTemplate() {
-    return createPointListTemplate(this.boardPoint);
-  }
-
-  getElement() {
-    if (!this.element) {
-      this.element = createElement(this.getTemplate());
-    }
-
-    return this.element;
-  }
-
-  removeElement() {
-    this.element = null;
-  }
-}
+export default createPointTemplate;
