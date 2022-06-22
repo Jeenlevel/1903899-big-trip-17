@@ -1,21 +1,36 @@
-import DestinationModel from './model/destination-model.js';
-import PointModel from './model/point-items-model.js';
-import SortView from './view/sort/sort-view.js';
-import FilterView from './view/filter/filter-view.js';
-import { render } from './render.js';
-import BoardPresenter from './presenter/board-presenter.js';
+import AllElPresenter from './presenter/all-el-presenter.js';
+import FilterPresenter from './presenter/filter.js';
+import PointsModel from './model/points.js';
+import FilterModel from './model/filter.js';
+import NewPointBtnView from './view/new-point-btn-view.js';
+import PointsApiService from './api.js';
+import { render } from './framework/render.js';
+import { AUTHORIZATION, END_POINT } from './consts.js';
 
-const pageHeader = document.querySelector('.page-header');
-const tripControls = pageHeader.querySelector('.trip-controls__filters');
+const tripHeaderContainer = document.querySelector('.trip-main');
+const filtersContainer = document.querySelector('.trip-controls__filters');
 
-const pageMain = document.querySelector('.page-main');
-const tripEvents = pageMain.querySelector('.trip-events');
+const newWaypointBtnComponent = new NewPointBtnView();
+const filterModel = new FilterModel();
+const pointsModel = new PointsModel(new PointsApiService(END_POINT, AUTHORIZATION));
+const filterPresenter = new FilterPresenter(filtersContainer, filterModel, pointsModel);
+const allElPresenter = new AllElPresenter( tripHeaderContainer, pointsModel, filterModel);
 
-const pointsModel = new PointModel();
-const destinationModel = new DestinationModel();
-const boardPresenter = new BoardPresenter();
+const handleWaypointCreateFormClose = () => {
+  newWaypointBtnComponent.element.disabled = false;
+};
 
-render(new SortView(), tripEvents);
-render(new FilterView(), tripControls);
+const handleNewWaypointBtnClick = () => {
+  allElPresenter.createPoint(handleWaypointCreateFormClose);
+  newWaypointBtnComponent.element.disabled = true;
+};
 
-boardPresenter.init(tripEvents, pointsModel, destinationModel);
+filterPresenter.init();
+allElPresenter.init();
+pointsModel.init()
+  .finally(() => {
+    render(newWaypointBtnComponent, tripHeaderContainer);
+    newWaypointBtnComponent.setNewPointBtnClickHandler(handleNewWaypointBtnClick);
+  });
+
+
