@@ -1,5 +1,5 @@
 import AllElPresenter from './presenter/all-el-presenter.js';
-import FilterPresenter from './presenter/filter.js';
+import FilterPresenter from './presenter/filter-presenter.js';
 import PointsModel from './model/points.js';
 import FilterModel from './model/filter.js';
 import NewPointBtnView from './view/new-point-btn-view.js';

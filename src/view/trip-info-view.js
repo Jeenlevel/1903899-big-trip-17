@@ -2,13 +2,19 @@ import dayjs from 'dayjs';
 import { DateFormat } from '../consts.js';
 import AbstractView from '../framework/view/abstract-view.js';
 
+const way = {
+  curr: 1,
+  cut: 2,
+  path: 3
+};
+
 const getTripTitle = (points) => {
   switch (points.length) {
-    case 1:
+    case way.curr:
       return [points[0].destination.name];
-    case 2:
+    case way.cut:
       return [`${points[0].destination.name} &mdash; ${points[1].destination.name}`];
-    case 3:
+    case way.path:
       return [`${points[0].destination.name} &mdash; ${points[1].destination.name} &mdash; ${points[2].destination.name}`];
     default:
       return [`${points[0].destination.name} &mdash; ... &mdash; ${points[points.length - 1].destination.name}`];
@@ -26,15 +32,12 @@ const getOffersCost = (points, offersData) => {
     const targetOffers = waypointOffers.filter((item) => waypoint.offers.some((el) => item.id === el));
     targetOffers.forEach((item) => pointsOffersPrice.push(item.price));
   }
-
-  const offersCost = pointsOffersPrice.reduce((acc, price) => acc + price, 0);
-  return offersCost;
+  return pointsOffersPrice.reduce((acc, price) => acc + price, 0);
 };
 
 const getTripCost = (points, offers) => {
   const basePriceCosts = points.reduce((sum, waypoint) => sum + Number(waypoint.basePrice), 0);
   const offersCost = getOffersCost(points, offers);
-
   return basePriceCosts + offersCost;
 };
 
